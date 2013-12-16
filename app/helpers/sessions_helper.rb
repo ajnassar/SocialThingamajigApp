@@ -9,7 +9,6 @@ module SessionsHelper
     @current_user = user
   end
 
-
   def log_out!
     if logged_in?
       current_user.reset_session_token!

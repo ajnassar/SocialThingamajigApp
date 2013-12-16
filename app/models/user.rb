@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
      self.save!
    end
 
-   def self.find_by_credentials(email, secret)
-     user = User.find_by_email(email)
-     return user if !user.nil? && user.is_password?(secret)
+   def self.find_by_credentials(params = {:email => nil, :secret => nil})
+     user = User.find_by_email(params[:email])
+     return user if !user.nil? && user.is_password?(params[:secret])
      nil
    end
 
