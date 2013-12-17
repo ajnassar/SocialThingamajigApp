@@ -3,6 +3,15 @@ class UserPasswordsController < ApplicationController
   end
 
   def create
+    user = User.find_by_email(params[:email])
+    if user
+      PasswordMailer.password_reset(user).deliver!
+      redirect_to new_session_url
+    else
+      flash.now[:errors] ||= []
+      flash.now[:errors] << "not a valid email"
+      render :new
+    end
   end
 
   def update

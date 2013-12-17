@@ -11,14 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131216224927) do
+ActiveRecord::Schema.define(:version => 20131217015716) do
+
+  create_table "friend_circle_memberships", :force => true do |t|
+    t.integer  "circle_id",  :null => false
+    t.integer  "member_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "friend_circle_memberships", ["circle_id"], :name => "index_friend_circle_memberships_on_circle_id"
+  add_index "friend_circle_memberships", ["member_id"], :name => "index_friend_circle_memberships_on_member_id"
+
+  create_table "friend_circles", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "friend_circles", ["user_id"], :name => "index_friend_circles_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",           :null => false
-    t.string   "password_digest", :null => false
-    t.string   "session_token",   :null => false
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "email",                :null => false
+    t.string   "password_digest",      :null => false
+    t.string   "session_token",        :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "password_reset_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

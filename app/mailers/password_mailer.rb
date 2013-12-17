@@ -16,15 +16,6 @@ class PasswordMailer < ActionMailer::Base
      }
     ).to_s
 
-
-    puts "-------------------------"
-    puts @link
-    puts "-------------------------"
-
-
     mail(to: @user_email, subject: "Email useful infromation")
   end
 end
-
-
-
