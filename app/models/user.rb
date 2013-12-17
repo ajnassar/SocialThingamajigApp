@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
 
    validates :email, :password_digest, :session_token, :presence => true
 
+   has_many :friend_circles
+   has_many :friend_circle_memberships, foreign_key: :member_id
+   has_many :friends, through: :friend_circle, source: :friends
+
 
    def set_password_reset_token
      self.password_reset_token = SecureRandom::urlsafe_base64(16)

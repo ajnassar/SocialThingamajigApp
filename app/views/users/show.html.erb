@@ -1,0 +1,17 @@
+<h1>User info for <%= @user.email %></h1>
+
+<% @user.attributes.each do |attr, val| %>
+  <%= "#{attr} : #{val}" %><br>
+<% end %>
+
+<br>
+
+<h4>
+  <%= link_to "Create a new friend circle", new_user_friend_circle_url(@user) %>
+</h4>
+<br>
+
+<h3>Friend Circles</h3>
+<% @user.friend_circles.each do |circle| %>
+  <%= link_to circle.name, friend_circle_url(circle) %>
+<% end %>

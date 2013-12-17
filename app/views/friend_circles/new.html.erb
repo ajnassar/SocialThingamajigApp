@@ -7,13 +7,11 @@
   <br>
 
   <% User.all.each do |user| %>
-
-    <label for="user_friend_<%= user.email %>"><%= user.email %></label>
     <input  type="checkbox"
-            name="user[friends][]"
-            value="<%= user.email %>"
+            name="friend_circle[friend_ids][]"
+            value="<%= user.id %>"
             id="user_friend_<%= user.email %>">
-
+    <label for="user_friend_<%= user.email %>"><%= user.email %></label>
     <br>
   <% end %>
 

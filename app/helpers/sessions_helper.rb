@@ -24,4 +24,11 @@ module SessionsHelper
   def logged_in?
     !!current_user
   end
+
+  def redirect_unless_logged_in
+    unless logged_in?
+      flash[:errors] = ["you must be logged in to see this page"]
+      redirect_to new_session_url
+    end
+  end
 end

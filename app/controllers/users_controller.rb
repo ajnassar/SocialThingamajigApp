@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  skip_before_filter :redirect_unless_logged_in, only: [:new, :create]
+
+  def show
+    @user = User.find(params[:id])
+  end
+
   def new
     @user = User.new
   end
@@ -7,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       log_in_user!(@user)
-      redirect_to new_user_url
+      redirect_to user_url(@user)
     else
       flash[:errors]=@user.errors.full_messages
       render :new

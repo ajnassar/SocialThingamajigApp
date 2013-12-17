@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :redirect_unless_logged_in, only: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -7,7 +9,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_credentials(params[:user])
     if @user
       log_in_user!(@user)
-      redirect_to new_session_url
+      redirect_to user_url(@user)
     else
       @user = User.new
       flash.now[:errors] ||= []
