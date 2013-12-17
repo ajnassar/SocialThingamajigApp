@@ -6,9 +6,6 @@ class UserPasswordsController < ApplicationController
   end
 
   def update
-    puts "------------------------------------"
-    puts current_user
-    puts "------------------------------------"
     current_user.reset_password!(params[:user][:password])
     redirect_to new_session_url
   end
